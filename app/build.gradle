@@ -1,0 +1,69 @@
+plugins {
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    //SJ Edit here
+    id("kotlin-kapt")
+}
+
+android {
+    namespace 'com.ftasia.recipeapp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ftasia.recipeapp"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+
+    //SJ Edit here
+    //////////////
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
+
+    // Room
+    implementation "androidx.room:room-ktx:2.6.0"
+    kapt "androidx.room:room-compiler:2.6.0"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:2.7.5"
+
+    // Extended Icons
+    implementation "androidx.compose.material:material-icons-extended:1.5.4"
+
+
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    //////////////
+
+}

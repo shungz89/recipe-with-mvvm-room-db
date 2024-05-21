@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_shade_1"
+    android:orientation="vertical"
+    tools:context=".ui.activity.AddEditRecipeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/idRecipeIV"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/no_image"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/idUploadImgBtn"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="Upload Image" />
+
+
+            <!--edit text for note title-->
+            <EditText
+                android:id="@+id/idEdtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="Enter Note Title"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:nestedScrollingEnabled="false"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:background="@color/light_blue_shade">
+
+                <Spinner
+                    android:id="@+id/recipeTypesSp"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    />
+
+            </LinearLayout>
+
+            <!--edit text for ingredients-->
+            <EditText
+                android:id="@+id/idEdtIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@color/black_shade_1"
+                android:gravity="start|top"
+                android:hint="Enter your Note Ingredients"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:nestedScrollingEnabled="false"
+                />
+
+            <!--edit text for note description-->
+            <EditText
+                android:id="@+id/idEdtSteps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@color/black_shade_1"
+                android:gravity="start|top"
+                android:hint="Enter your Steps"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:nestedScrollingEnabled="false"
+                />
+
+            <!--button for saving and updating a note-->
+            <Button
+                android:id="@+id/idBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/custom_button_back"
+                android:text="Button"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

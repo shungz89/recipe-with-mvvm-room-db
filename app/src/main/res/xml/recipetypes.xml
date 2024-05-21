@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="recipe_types">
+        <item>
+            <recipe>
+                <recipeTypeName>Breakfast</recipeTypeName>
+                <recipeTypeId>1</recipeTypeId>
+            </recipe>
+        </item>
+        <item>
+            <recipe>
+                <recipeTypeName>Lunch</recipeTypeName>
+                <recipeTypeId>2</recipeTypeId>
+            </recipe>
+        </item>
+        <item>
+            <recipe>
+                <recipeTypeName>Dinner</recipeTypeName>
+                <recipeTypeId>3</recipeTypeId>
+            </recipe>
+        </item>
+        <item>
+            <recipe>
+                <recipeTypeName>Snack</recipeTypeName>
+                <recipeTypeId>4</recipeTypeId>
+            </recipe>
+        </item>
+        <item>
+            <recipe>
+                <recipeTypeName>Dessert</recipeTypeName>
+                <recipeTypeId>5</recipeTypeId>
+            </recipe>
+        </item>
+    </array>
+</resources>
