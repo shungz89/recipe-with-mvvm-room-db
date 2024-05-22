@@ -279,37 +279,6 @@ class AddEditRecipeActivity : AppCompatActivity() {
             .into(recipeIV)
     }
 
-
-    ///UNUSED
-
-    ///
-//    fun getBitmapFromUri(context: Context, uri: Uri): Bitmap? {
-//        var inputStream: InputStream? = null
-//        try {
-//            inputStream = context.contentResolver.openInputStream(uri)
-//            return BitmapFactory.decodeStream(inputStream)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        } finally {
-//            inputStream?.close()
-//        }
-//        return null
-//    }
-
-    //    // Function to convert Bitmap to Base64 String
-//    fun bitmapToBase64(bitmap: Bitmap): String {
-//        val outputStream = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream)
-//        val byteArray = outputStream.toByteArray()
-//        return Base64.encodeToString(byteArray, Base64.DEFAULT)
-//    }
-//
-//    // Function to convert Base64 String to Bitmap
-//    fun base64ToBitmap(base64String: String): Bitmap {
-//        val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
-//        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-//    }
-
     private fun loadRecipeTypes(): List<RecipeType> {
         val recipeTypes = mutableListOf<RecipeType>()
         val parser: XmlResourceParser = resources.getXml(R.xml.recipetypes)

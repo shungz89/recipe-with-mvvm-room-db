@@ -18,4 +18,10 @@ interface RecipeDao {
     @Query("Select * from recipeTable order by id ASC")
     fun getAllRecipes(): LiveData<List<Recipe>>
 
+    @Query("SELECT COUNT(*) FROM recipeTable")
+    suspend fun getRecipeCount(): Int
+
+    @Insert
+    suspend fun insertAll(recipes: List<Recipe>)
+
 }

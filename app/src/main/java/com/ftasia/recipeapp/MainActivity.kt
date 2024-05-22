@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
 //                viewModal.filterRecipesByType(selectedItem.recipeTypeId)
                 if (selectedItem.recipeTypeId == -1) {
                     // "All" selected
-                    Toast.makeText(this@MainActivity, "Selected: All", Toast.LENGTH_SHORT).show()
                     viewModal.allRecipes.observe(this@MainActivity, Observer { list ->
                         list?.let {
                             (notesRV.adapter as RecipeRVAdapter).updateList(it)
@@ -83,11 +82,6 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
                     })
                 } else {
                     // Specific recipe type selected
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Selected: ${selectedItem.recipeTypeName} (ID: ${selectedItem.recipeTypeId})",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     viewModal.allRecipes.observe(this@MainActivity, Observer { list ->
                         list?.let {
                             (notesRV.adapter as RecipeRVAdapter).updateList(it.filter { it.recipeTypes == "${selectedItem.recipeTypeId}" })
@@ -118,6 +112,9 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
             list?.let {
                 //on below line we are updating our list.
                 noteRVAdapter.updateList(it)
+                for(i in it){
+                    Log.d("Recipe ImgPath", i.recipeImagePath)
+                }
             }
         })
         addFAB.setOnClickListener {
