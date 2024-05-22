@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
 
     //on below line we are creating a variable for our recycler view, exit text, button and viewmodal.
     lateinit var viewModal: RecipeViewModal
-    lateinit var notesRV: RecyclerView
+    lateinit var recipesRV: RecyclerView
     lateinit var addFAB: FloatingActionButton
     lateinit var spinnerRecipeTypes: Spinner
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //on below line we are initializing all our variables.
-        notesRV = findViewById(R.id.notesRV)
+        recipesRV = findViewById(R.id.recipesRV)
         addFAB = findViewById(R.id.idFAB)
         spinnerRecipeTypes = findViewById(R.id.recipeTypesSp)
 
@@ -74,14 +74,14 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
                     // "All" selected
                     viewModal.allRecipes.observe(this@MainActivity, Observer { list ->
                         list?.let {
-                            (notesRV.adapter as RecipeRVAdapter).updateList(it)
+                            (recipesRV.adapter as RecipeRVAdapter).updateList(it)
                         }
                     })
                 } else {
                     // Specific recipe type selected
                     viewModal.allRecipes.observe(this@MainActivity, Observer { list ->
                         list?.let {
-                            (notesRV.adapter as RecipeRVAdapter).updateList(it.filter { it.recipeTypes == "${selectedItem.recipeTypeId}" })
+                            (recipesRV.adapter as RecipeRVAdapter).updateList(it.filter { it.recipeTypes == "${selectedItem.recipeTypeId}" })
                         }
                     })
                 }
@@ -94,28 +94,28 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
         }
 
         //on below line we are setting layout manager to our recycler view.
-        notesRV.layoutManager = LinearLayoutManager(this)
+        recipesRV.layoutManager = LinearLayoutManager(this)
         //on below line we are initializing our adapter class.
-        val noteRVAdapter = RecipeRVAdapter(this, this, this)
+        val recipeRVAdapter = RecipeRVAdapter(this, this, this)
         //on below line we are setting adapter to our recycler view.
-        notesRV.adapter = noteRVAdapter
+        recipesRV.adapter = recipeRVAdapter
         //on below line we are initializing our view modal.
         viewModal = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(RecipeViewModal::class.java)
-        //on below line we are calling all notes methof from our view modal class to observer the changes on list.
+        //on below line we are calling all recipes method from our view modal class to observer the changes on list.
         viewModal.allRecipes.observe(this, Observer { list ->
             list?.let {
                 //on below line we are updating our list.
-                noteRVAdapter.updateList(it)
+                recipeRVAdapter.updateList(it)
                 for (i in it) {
                     Log.d("Recipe ImgPath", i.recipeImagePath)
                 }
             }
         })
         addFAB.setOnClickListener {
-            //adding a click listner for fab button and opening a new intent to add a new note.
+            //adding a click listner for fab button and opening a new intent to add a new recipe.
             val intent = Intent(this@MainActivity, AddEditRecipeActivity::class.java)
             intent.putExtra(IntentConstant.RECIPE_DETAILS_PAGE_ACTION, IntentConstant.ACTION_ADD)
             startActivity(intent)
@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
     }
 
     override fun onDeleteIconClick(recipe: Recipe) {
-        //in on note click method we are calling delete method from our viw modal to delete our not.
+        //in on recipe click method we are calling delete method from our viw modal to delete our not.
         viewModal.deleteRecipe(recipe)
         //displaying a toast message
         Toast.makeText(this, "${recipe.recipleTitle} Deleted", Toast.LENGTH_LONG).show()

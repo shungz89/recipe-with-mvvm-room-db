@@ -19,7 +19,7 @@ class RecipeViewModal(application: Application) : AndroidViewModel(application) 
 
 
     init {
-        val dao = RecipeDatabase.getDatabase(application).getNotesDao()
+        val dao = RecipeDatabase.getDatabase(application).getRecipesDao()
         repository = RecipeRepository(dao)
         allRecipes = repository.allRecipes
 

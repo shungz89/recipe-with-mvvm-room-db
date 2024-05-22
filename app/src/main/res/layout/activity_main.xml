@@ -45,9 +45,9 @@
 
         </LinearLayout>
 
-        <!--recycler view for displaying all notes-->
+        <!--recycler view for displaying all recipes-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notesRV"
+            android:id="@+id/recipesRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="8dp"
@@ -55,7 +55,7 @@
             tools:listitem="@layout/recipe_rv_item" />
     </LinearLayout>
 
-    <!--fab for adding a new note-->
+    <!--fab for adding a new recipe-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/idFAB"
         android:layout_width="wrap_content"

@@ -52,14 +52,14 @@
                 android:text="Title:"
                 android:textColor="@color/yellow" />
 
-            <!--edit text for note title-->
+            <!--edit text for recipe title-->
             <EditText
                 android:id="@+id/idEdtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="16dp"
-                android:hint="Enter Note Title"
+                android:hint="Enter Recipe Title"
                 android:nestedScrollingEnabled="false"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint_text_color" />
@@ -105,7 +105,7 @@
                 android:layout_weight="1"
                 android:background="@color/black_shade_1"
                 android:gravity="start|top"
-                android:hint="Enter your Note Ingredients"
+                android:hint="Enter your Recipe Ingredients"
                 android:inputType="textMultiLine"
                 android:nestedScrollingEnabled="false"
                 android:singleLine="false"
@@ -121,7 +121,7 @@
                 android:text="Steps:"
                 android:textColor="@color/yellow" />
 
-            <!--edit text for note description-->
+            <!--edit text for recipe description-->
             <EditText
                 android:id="@+id/idEdtSteps"
                 android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/hint_text_color" />
 
-            <!--button for saving and updating a note-->
+            <!--button for saving and updating a recipe-->
             <Button
                 android:id="@+id/idBtn"
                 android:layout_width="match_parent"

@@ -9,7 +9,7 @@ import com.ftasia.recipeapp.entity.Recipe
 @Database(entities = arrayOf(Recipe::class), version = 1, exportSchema = false)
 abstract class RecipeDatabase : RoomDatabase() {
 
-    abstract fun getNotesDao(): RecipeDao
+    abstract fun getRecipesDao(): RecipeDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
