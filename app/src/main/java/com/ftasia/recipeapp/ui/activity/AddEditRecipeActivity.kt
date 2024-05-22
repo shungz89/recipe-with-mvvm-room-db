@@ -182,8 +182,11 @@ class AddEditRecipeActivity : AppCompatActivity() {
                     this.finish()
 
                 } else {
-                    Toast.makeText(this, "Please fill in Title, Ingredients & Steps", Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(
+                        this,
+                        "Please fill in Title, Ingredients & Steps",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             } else {
                 if (recipeTitle.isNotEmpty() && recipeIngredients.isNotEmpty()) {
