@@ -15,8 +15,7 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,10 +31,10 @@
                 android:id="@+id/idRecipeIV"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
+                android:layout_gravity="center"
                 android:layout_margin="16dp"
-                android:src="@drawable/no_image"
                 android:scaleType="fitXY"
-                android:layout_gravity="center"/>
+                android:src="@drawable/no_image" />
 
             <Button
                 android:id="@+id/idUploadImgBtn"
@@ -45,17 +44,34 @@
                 android:text="Upload Image" />
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="16sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Title:"
+                android:textColor="@color/yellow" />
+
             <!--edit text for note title-->
             <EditText
                 android:id="@+id/idEdtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
                 android:hint="Enter Note Title"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
                 android:nestedScrollingEnabled="false"
-                />
+                android:textColor="@color/white"
+                android:textColorHint="@color/hint_text_color" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="16sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Type:"
+                android:textColor="@color/yellow" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,10 +83,18 @@
                 <Spinner
                     android:id="@+id/recipeTypesSp"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    />
+                    android:layout_height="56dp" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="16sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Ingredients:"
+                android:textColor="@color/yellow" />
+
 
             <!--edit text for ingredients-->
             <EditText
@@ -83,11 +107,19 @@
                 android:gravity="start|top"
                 android:hint="Enter your Note Ingredients"
                 android:inputType="textMultiLine"
+                android:nestedScrollingEnabled="false"
                 android:singleLine="false"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:nestedScrollingEnabled="false"
-                />
+                android:textColorHint="@color/hint_text_color" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="16sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Steps:"
+                android:textColor="@color/yellow" />
 
             <!--edit text for note description-->
             <EditText
@@ -100,19 +132,18 @@
                 android:gravity="start|top"
                 android:hint="Enter your Steps"
                 android:inputType="textMultiLine"
+                android:nestedScrollingEnabled="false"
                 android:singleLine="false"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:nestedScrollingEnabled="false"
-                />
+                android:textColorHint="@color/hint_text_color" />
 
             <!--button for saving and updating a note-->
             <Button
                 android:id="@+id/idBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="20dp"
                 android:background="@drawable/custom_button_back"
                 android:text="Button"
                 android:textAllCaps="false"

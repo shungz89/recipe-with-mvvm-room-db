@@ -1,7 +1,6 @@
 package com.ftasia.recipeapp
 
 import android.content.Intent
-import android.content.res.XmlResourceParser
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,11 +20,9 @@ import com.ftasia.recipeapp.constant.IntentConstant
 import com.ftasia.recipeapp.entity.Recipe
 import com.ftasia.recipeapp.entity.RecipeType
 import com.ftasia.recipeapp.ui.activity.AddEditRecipeActivity
+import com.ftasia.recipeapp.utils.XMLUtils
 import com.ftasia.recipeapp.viewmodel.RecipeViewModal
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserException
-import java.io.IOException
 
 
 class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDeleteInterface {
@@ -46,7 +43,7 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
 
 
         // Load and parse the XML data
-        val recipeTypes = loadRecipeTypes()
+        val recipeTypes = XMLUtils.loadRecipeTypes(application)
 
         // Create a new list with "All" as the first item
         val extendedRecipeTypes = mutableListOf(RecipeType("All", -1))
@@ -112,7 +109,7 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
             list?.let {
                 //on below line we are updating our list.
                 noteRVAdapter.updateList(it)
-                for(i in it){
+                for (i in it) {
                     Log.d("Recipe ImgPath", i.recipeImagePath)
                 }
             }
@@ -138,55 +135,12 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
         startActivity(intent)
     }
 
-    override fun onDeleteIconClick(note: Recipe) {
+    override fun onDeleteIconClick(recipe: Recipe) {
         //in on note click method we are calling delete method from our viw modal to delete our not.
-        viewModal.deleteRecipe(note)
+        viewModal.deleteRecipe(recipe)
         //displaying a toast message
-        Toast.makeText(this, "${note.recipleTitle} Deleted", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "${recipe.recipleTitle} Deleted", Toast.LENGTH_LONG).show()
     }
 
-    private fun loadRecipeTypes(): List<RecipeType> {
-        val recipeTypes = mutableListOf<RecipeType>()
-        val parser: XmlResourceParser = resources.getXml(R.xml.recipetypes)
-        try {
-            var eventType = parser.eventType
-            var currentName: String? = null
-            var recipeTypeName: String? = null
-            var recipeTypeId: Int? = null
-
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                when (eventType) {
-                    XmlPullParser.START_TAG -> {
-                        currentName = parser.name
-                        if (currentName == "recipe") {
-                            recipeTypeName = null
-                            recipeTypeId = null
-                        }
-                    }
-
-                    XmlPullParser.TEXT -> {
-                        when (currentName) {
-                            "recipeTypeName" -> recipeTypeName = parser.text
-                            "recipeTypeId" -> recipeTypeId = parser.text.toIntOrNull()
-                        }
-                    }
-
-                    XmlPullParser.END_TAG -> {
-                        if (parser.name == "recipe" && recipeTypeName != null && recipeTypeId != null) {
-                            recipeTypes.add(RecipeType(recipeTypeName, recipeTypeId))
-                        }
-                    }
-                }
-                eventType = parser.next()
-            }
-        } catch (e: XmlPullParserException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            parser.close()
-        }
-        return recipeTypes
-    }
 
 }

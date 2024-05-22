@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.ftasia.recipeapp.R
 import com.ftasia.recipeapp.entity.Recipe
+import com.ftasia.recipeapp.utils.XMLUtils
 
 class RecipeRVAdapter(
     val context: Context,
@@ -28,6 +29,7 @@ class RecipeRVAdapter(
         //on below line we are creating an initializing all our variables which we have added in layout file.
         val recipeTV = itemView.findViewById<TextView>(R.id.idTVRecipe)
         val dateTV = itemView.findViewById<TextView>(R.id.idTVDate)
+        val recipeTypeTV = itemView.findViewById<TextView>(R.id.idTVRecipeType)
         val deleteIV = itemView.findViewById<ImageView>(R.id.idIVDelete)
         val recipeIV = itemView.findViewById<ImageView>(R.id.idIVRecipe)
 
@@ -45,6 +47,14 @@ class RecipeRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //on below line we are setting data to item of recycler view.
         holder.recipeTV.setText(allRecipes.get(position).recipleTitle)
+
+
+        val recipe = allRecipes.get(position)
+        val typeIndex = recipe.recipeTypes.toIntOrNull() ?: -1
+        val recipeType = XMLUtils.getTypesBasedOnId(context, typeIndex)
+        holder.recipeTypeTV.text = "(${recipeType?.recipeTypeName ?: "All"})"
+
+
         Glide.with(context)
             .load(allRecipes.get(position).recipeImagePath)
             .placeholder(R.drawable.no_image)
@@ -83,10 +93,10 @@ class RecipeRVAdapter(
 
 interface RecipeClickDeleteInterface {
     //creating a method for click action on delete image view.
-    fun onDeleteIconClick(note: Recipe)
+    fun onDeleteIconClick(recipe: Recipe)
 }
 
 interface RecipeClickInterface {
     //creating a method for click action on recycler view item for updating it.
-    fun onNoteClick(note: Recipe)
+    fun onNoteClick(recipe: Recipe)
 }

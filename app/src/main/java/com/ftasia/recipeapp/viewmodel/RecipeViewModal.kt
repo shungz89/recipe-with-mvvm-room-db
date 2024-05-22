@@ -4,13 +4,11 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ftasia.recipeapp.R
 import com.ftasia.recipeapp.database.RecipeDatabase
-import com.ftasia.recipeapp.repository.RecipeRepository
 import com.ftasia.recipeapp.entity.Recipe
-import com.ftasia.recipeapp.utils.ImageUtils
+import com.ftasia.recipeapp.repository.RecipeRepository
 import com.ftasia.recipeapp.utils.ImageUtils.Companion.saveDrawableToInternalStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

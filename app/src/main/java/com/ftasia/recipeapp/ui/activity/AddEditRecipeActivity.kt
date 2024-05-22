@@ -25,6 +25,7 @@ import com.ftasia.recipeapp.R
 import com.ftasia.recipeapp.constant.IntentConstant
 import com.ftasia.recipeapp.entity.Recipe
 import com.ftasia.recipeapp.entity.RecipeType
+import com.ftasia.recipeapp.utils.XMLUtils
 import com.ftasia.recipeapp.viewmodel.RecipeViewModal
 import com.github.dhaval2404.imagepicker.ImagePicker
 import org.xmlpull.v1.XmlPullParser
@@ -79,7 +80,7 @@ class AddEditRecipeActivity : AppCompatActivity() {
 
 
         // Load and parse the XML data
-        val recipeTypes = loadRecipeTypes()
+        val recipeTypes = XMLUtils.loadRecipeTypes(application)
 
         // Create a new list with "All" as the first item
         val extendedRecipeTypes = mutableListOf(RecipeType("All", -1))
@@ -159,7 +160,7 @@ class AddEditRecipeActivity : AppCompatActivity() {
 
             //on below line we are checking the type and then saving or updating the data.
             if (recipeDetailsPageAction.equals("Edit")) {
-                if (recipeTitle.isNotEmpty() && recipeIngredients.isNotEmpty()) {
+                if (recipeTitle.isNotEmpty() && recipeIngredients.isNotEmpty() && recipeSteps.isNotEmpty()) {
                     val sdf = SimpleDateFormat("dd MMM, yyyy - HH:mm")
                     val currentDateAndTime: String = sdf.format(Date())
 
@@ -181,7 +182,7 @@ class AddEditRecipeActivity : AppCompatActivity() {
                     this.finish()
 
                 } else {
-                    Toast.makeText(this, "Please fill in Title and Description", Toast.LENGTH_LONG)
+                    Toast.makeText(this, "Please fill in Title, Ingredients & Steps", Toast.LENGTH_LONG)
                         .show()
                 }
             } else {
@@ -279,48 +280,5 @@ class AddEditRecipeActivity : AppCompatActivity() {
             .into(recipeIV)
     }
 
-    private fun loadRecipeTypes(): List<RecipeType> {
-        val recipeTypes = mutableListOf<RecipeType>()
-        val parser: XmlResourceParser = resources.getXml(R.xml.recipetypes)
-        try {
-            var eventType = parser.eventType
-            var currentName: String? = null
-            var recipeTypeName: String? = null
-            var recipeTypeId: Int? = null
-
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                when (eventType) {
-                    XmlPullParser.START_TAG -> {
-                        currentName = parser.name
-                        if (currentName == "recipe") {
-                            recipeTypeName = null
-                            recipeTypeId = null
-                        }
-                    }
-
-                    XmlPullParser.TEXT -> {
-                        when (currentName) {
-                            "recipeTypeName" -> recipeTypeName = parser.text
-                            "recipeTypeId" -> recipeTypeId = parser.text.toIntOrNull()
-                        }
-                    }
-
-                    XmlPullParser.END_TAG -> {
-                        if (parser.name == "recipe" && recipeTypeName != null && recipeTypeId != null) {
-                            recipeTypes.add(RecipeType(recipeTypeName, recipeTypeId))
-                        }
-                    }
-                }
-                eventType = parser.next()
-            }
-        } catch (e: XmlPullParserException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            parser.close()
-        }
-        return recipeTypes
-    }
 
 }

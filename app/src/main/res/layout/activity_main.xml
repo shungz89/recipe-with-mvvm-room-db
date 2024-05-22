@@ -13,6 +13,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="@string/app_name" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="16sp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:text="Filter By:" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -23,8 +41,7 @@
             <Spinner
                 android:id="@+id/recipeTypesSp"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                />
+                android:layout_height="56dp" />
 
         </LinearLayout>
 
@@ -33,7 +50,8 @@
             android:id="@+id/notesRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
             tools:listitem="@layout/recipe_rv_item" />
     </LinearLayout>
 
