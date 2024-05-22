@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!--text view for displaying our note text-->
+            <!--text view for displaying our recipe text-->
             <TextView
                 android:id="@+id/idTVRecipe"
                 android:layout_width="match_parent"

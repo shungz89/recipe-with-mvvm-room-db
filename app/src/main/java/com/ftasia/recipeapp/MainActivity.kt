@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
         }
     }
 
-    override fun onNoteClick(recipe: Recipe) {
+    override fun onRecipeClick(recipe: Recipe) {
         //opening a new intent and passing a data to it.
         val intent = Intent(this@MainActivity, AddEditRecipeActivity::class.java)
         intent.putExtra(IntentConstant.RECIPE_DETAILS_PAGE_ACTION, IntentConstant.ACTION_EDIT)

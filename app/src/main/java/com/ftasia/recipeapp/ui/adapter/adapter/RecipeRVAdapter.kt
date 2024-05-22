@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -63,14 +65,30 @@ class RecipeRVAdapter(
         holder.dateTV.setText("Last Updated : " + allRecipes.get(position).timeStamp)
         //on below line we are adding click listner to our delete image view icon.
         holder.deleteIV.setOnClickListener {
-            //on below line we are calling a note click interface and we are passing a position to it.
-            recipeDeleteInterface.onDeleteIconClick(allRecipes.get(position))
+            /// Create and show the AlertDialog
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Confirm Delete Recipe")
+            builder.setMessage("Are you sure you want to delete \"${allRecipes.get(position).recipleTitle}\" recipe?")
+            builder.setPositiveButton("Yes") { dialog, _ ->
+                // on below line we are calling a recipe click interface and we are passing a position to it.
+                recipeDeleteInterface.onDeleteIconClick(allRecipes[position])
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            val alertDialog = builder.create()
+            alertDialog.show()
+
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextColor(ContextCompat.getColor(context, R.color.red))
+
         }
 
         //on below line we are adding click listner to our recycler view item.
         holder.itemView.setOnClickListener {
-            //on below line we are calling a note click interface and we are passing a position to it.
-            recipeClickInterface.onNoteClick(allRecipes.get(position))
+            //on below line we are calling a recipe click interface and we are passing a position to it.
+            recipeClickInterface.onRecipeClick(allRecipes.get(position))
         }
     }
 
@@ -79,11 +97,11 @@ class RecipeRVAdapter(
         return allRecipes.size
     }
 
-    //below method is use to update our list of notes.
+    //below method is use to update our list of recipes.
     fun updateList(newList: List<Recipe>) {
-        //on below line we are clearing our notes array list/
+        //on below line we are clearing our recipes array list/
         allRecipes.clear()
-        //on below line we are adding a new list to our all notes list.
+        //on below line we are adding a new list to our all recipes list.
         allRecipes.addAll(newList)
         //on below line we are calling notify data change method to notify our adapter.
         notifyDataSetChanged()
@@ -98,5 +116,5 @@ interface RecipeClickDeleteInterface {
 
 interface RecipeClickInterface {
     //creating a method for click action on recycler view item for updating it.
-    fun onNoteClick(recipe: Recipe)
+    fun onRecipeClick(recipe: Recipe)
 }

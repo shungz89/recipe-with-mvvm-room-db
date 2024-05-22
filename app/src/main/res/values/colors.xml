@@ -18,5 +18,6 @@
     <color name="light_blue_shade">#12B2E6</color>
 
     <color name="hint_text_color">#80FFFFFF</color>
+    <color name="red">#FF0000</color>
 
 </resources>
