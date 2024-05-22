@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ftasia.recipeapp.R
 import com.ftasia.recipeapp.database.RecipeDatabase
@@ -16,6 +17,9 @@ import kotlinx.coroutines.launch
 class RecipeViewModal(application: Application) : AndroidViewModel(application) {
     val allRecipes: LiveData<List<Recipe>>
     val repository: RecipeRepository
+
+    val isLoading = MutableLiveData<Boolean>()
+
 
 
     init {
@@ -36,6 +40,9 @@ class RecipeViewModal(application: Application) : AndroidViewModel(application) 
                 prepopulateDatabase(application)
                 sharedPreferences.edit().putBoolean("firstTime", false).apply()
             }
+
+            isLoading.postValue(false) // Set loading to false after data is loaded
+
         }
     }
 

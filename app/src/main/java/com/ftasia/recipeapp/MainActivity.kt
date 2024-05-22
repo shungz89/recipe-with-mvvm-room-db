@@ -1,13 +1,16 @@
 package com.ftasia.recipeapp
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +35,8 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
     lateinit var recipesRV: RecyclerView
     lateinit var addFAB: FloatingActionButton
     lateinit var spinnerRecipeTypes: Spinner
+    lateinit var progressDialog: AlertDialog
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,11 +104,30 @@ class MainActivity : AppCompatActivity(), RecipeClickInterface, RecipeClickDelet
         val recipeRVAdapter = RecipeRVAdapter(this, this, this)
         //on below line we are setting adapter to our recycler view.
         recipesRV.adapter = recipeRVAdapter
+
+
+        // Set up the progress dialog
+        val builder = AlertDialog.Builder(this)
+        val inflater = LayoutInflater.from(this)
+        val dialogView = inflater.inflate(R.layout.dialog_loading, null)
+        builder.setView(dialogView)
+        builder.setCancelable(false)
+        progressDialog = builder.create()
+        progressDialog.show()
+
         //on below line we are initializing our view modal.
         viewModal = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(RecipeViewModal::class.java)
+
+        // Observe the loading status
+        viewModal.isLoading.observe(this, Observer { isLoading ->
+            if (isLoading == false) {
+                progressDialog.dismiss()
+            }
+        })
+
         //on below line we are calling all recipes method from our view modal class to observer the changes on list.
         viewModal.allRecipes.observe(this, Observer { list ->
             list?.let {
